@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图形 Hover 效果</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #181921;
+    }
+    .stage {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 34px;
+      padding: 40px 32px;
+    }
+    .cube {
+      --shadow-color: rgba(255, 94, 98, .25);
+      position: relative;
+      width: 104px;
+      height: 104px;
+      flex: 0 0 104px;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 10px 24px var(--shadow-color);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .cube::after {
+      content: "hover";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font: 600 22px/1 Arial, sans-serif;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    /* 悬停时向上移动 10px，阴影的水平和垂直偏移均为 0。 */
+    .cube:hover, .cube:focus-visible {
+      transform: translateY(-10px);
+      box-shadow: 0 0 24px var(--shadow-color);
+    }
+    .cube:hover::after, .cube:focus-visible::after { opacity: 1; }
+    .cube:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+    .c1 { background: linear-gradient(135deg, #ff9a56, #ff5e62); }
+    .c2 {
+      border-radius: 11px;
+      background: linear-gradient(135deg, #32ca8b, #29cebb);
+      --shadow-color: rgba(41, 206, 187, .25);
+    }
+    .c3 {
+      border-radius: 25px;
+      background: linear-gradient(180deg, #ad89a4, #70618f);
+      --shadow-color: rgba(133, 106, 166, .25);
+    }
+    .c4 {
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbd76a, #ff9f87);
+      --shadow-color: rgba(255, 159, 135, .25);
+    }
+    .c5 {
+      border-radius: 7px;
+      background: linear-gradient(135deg, #477e64, #496c80);
+      --shadow-color: rgba(73, 108, 128, .2);
+    }
+    .c6 {
+      border-radius: 50%;
+      background: radial-gradient(circle at 65% 35%, #b58eb5, #846991);
+      --shadow-color: rgba(160, 121, 177, .25);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cube, .cube::after { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="图形悬停效果展示">
+    <button class="cube c1" type="button" aria-label="橙红色正方形"></button>
+    <button class="cube c2" type="button" aria-label="绿色圆角正方形"></button>
+    <button class="cube c3" type="button" aria-label="紫色圆角正方形"></button>
+    <button class="cube c4" type="button" aria-label="橙黄色圆形"></button>
+    <button class="cube c5" type="button" aria-label="青绿色圆角正方形"></button>
+    <button class="cube c6" type="button" aria-label="紫色圆形"></button>
+  </main>
+</body>
+</html>
